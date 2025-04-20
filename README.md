@@ -55,18 +55,34 @@ This extension does **not collect any data**. It only interacts with the open De
 See [privacy-policy.md](./privacy-policy.md) for more details.
 
 ---
+## 🧩 DeepSeek Identifiers Summary
 
-## 🛠 Troubleshooting
+- **Prompt Textarea**
+  - **Selector:** `#chat-input`
+  - **Type:** `<textarea>`
+  - **Usage:** User input field for asking questions
+  - **Notes:** React-controlled; must use native setter and dispatch an `input` event.
 
-- If you see ❌ `Prompt textarea not found`, make sure you're on the **DeepSeek chat page**, and that the input's `id` is still `#chat-input`.
-- Always allow the extension to run on `deepseek.com` if prompted.
-- Make sure Chrome is up-to-date.
+- **Send Button**
+  - **Selector:** `div[role="button"]._7436101`
+  - **Type:** `<div>` with `role="button"`
+  - **Usage:** Triggers message sending
+  - **Disabled State:** Check `aria-disabled="true"` or `disabled` attribute
 
----
+- **Injection Algorithm**
+  1. Select `#chat-input`
+  2. Set its value with native setter
+  3. Dispatch `input` event
+  4. Select send button
+  5. Retry clicking until active or timeout
 
-## 📌 Credits
+- **Retry Logic**
+  - Max attempts: 10
+  - Interval: 300ms
+  - Fallback if button remains disabled
 
-Built with ❤️ using JavaScript, Chrome Extensions API, and a little DOM wizardry.
+> 🛠️ These selectors are accurate as of April 2025. Always inspect the latest DeepSeek DOM if the extension fails to find elements.
+
 
 ---
 
