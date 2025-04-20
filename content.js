@@ -1,13 +1,28 @@
-// Check if we are on the DeepSeek page and insert the sidebar
-if (window.location.href.includes('deepseek.com')) {
-    const iframe = document.createElement('iframe');
-    iframe.src = chrome.runtime.getURL('sidebar.html');
-    iframe.style.position = 'fixed';
-    iframe.style.right = '0';
-    iframe.style.top = '0';
-    iframe.style.width = '300px';
-    iframe.style.height = '100%';
-    iframe.style.border = 'none';
-    iframe.style.zIndex = '10000';
-    document.body.appendChild(iframe);
-}
+// content.js
+(function () {
+    const sidebarId = "deepseek-sidebar-container";
+  
+    function injectSidebar() {
+      if (document.getElementById(sidebarId)) return; // avoid duplicates
+  
+      const sidebar = document.createElement("iframe");
+      sidebar.id = sidebarId;
+      sidebar.src = chrome.runtime.getURL("sidebar.html");
+      sidebar.style.cssText = `
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 320px;
+        border: none;
+        z-index: 9999;
+        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+      `;
+      document.body.appendChild(sidebar);
+    }
+  
+    if (window.location.hostname.includes("deepseek.com")) {
+      injectSidebar();
+    }
+  })();
+  

@@ -38,6 +38,7 @@ document.getElementById('submit-question').addEventListener('click', async () =>
           if (result?.success) {
             statusEl.textContent = "✅ Question sent successfully!";
             statusEl.className = "status success";
+            document.getElementById('question').value = ''; // Clear the input
           } else {
             statusEl.textContent = "❌ Failed to send. " + (result?.error || "Unknown error");
             statusEl.className = "status error";

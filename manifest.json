@@ -1,33 +1,29 @@
 {
-    "manifest_version": 3,
-    "name": "Deepseek Sidebar Extension",
-    "description": "Ask AI questions directly from a popup through Deepseek.",
-    "version": "1.0",
-    "permissions": [
-      "tabs",
-      "scripting",
-      "activeTab"
-    ],
-    "host_permissions": [
-      "https://chat.deepseek.com/*"
-    ],
-    "action": {
-      "default_popup": "popup.html",
-      "default_icon": {
-        "16": "icons/icon16.png",
-        "48": "icons/icon48.png",
-        "128": "icons/icon128.png"
-      }
-    },
-    "background": {
-      "service_worker": "background.js"
-    },
-    "content_scripts": [
-      {
-        "matches": [
-          "https://chat.deepseek.com/*"
-        ],
-        "js": ["content.js"]
-      }
-    ]
-  }
+  "manifest_version": 3,
+  "name": "Deepseek Assistant",
+  "version": "1.0",
+  "description": "Ask Deepseek ChatGPT questions from popup.",
+  "permissions": ["scripting", "tabs", "activeTab"],
+  "action": {
+    "default_title": "Toggle DeepSeek Sidebar",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "host_permissions": ["https://*.deepseek.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["*://*.deepseek.com/*"],
+      "js": ["sidebar.js"],
+      "css": ["sidebar.css"]
+    }
+  ]
+}

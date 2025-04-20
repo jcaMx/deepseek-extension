@@ -3,31 +3,40 @@ body {
     padding: 15px;
     width: 300px;
     background-color: #f9f9f9;
+    background-color: #f9f9f9;
+    margin: 0 auto; 
+    box-sizing: border-box;
   }
 
   h3 {
-    margin-top: 0;
+    margin: 0 0 15px 0; /* Consistent margin on bottom only */
+    text-align: center; 
   }
 
   textarea {
-    width: 100%;
+    width: calc(100% - 22px); /* Accounts for padding and border */
     height: 100px;
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-bottom: 10px;
+    margin-bottom: 15px; /* Increased spacing */
+    resize: vertical; /* Allows only vertical resizing */
+    display: block; /* Ensures proper box model */
+  
   }
 
   button {
     width: 100%;
-    padding: 10px;
+    padding: 12px; /* Slightly larger padding */
     font-size: 14px;
     background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.2s; /* Smooth hover effect */
+    margin-bottom: 15px; /* Consistent spacing */
   }
 
   button:hover {
@@ -38,12 +47,14 @@ body {
     font-size: 12px;
     color: #333;
     margin-top: 10px;
+    text-align: center; /* Centers status messages */
+    min-height: 18px; /* Prevents layout shift when messages appear */
   }
 
   .error {
-    color: red;
+    color: #dc3545; 
   }
-
+  
   .success {
-    color: green;
+    color: #28a745; 
   }
