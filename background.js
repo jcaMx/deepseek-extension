@@ -1,3 +1,3 @@
 chrome.runtime.onInstalled.addListener(() => {
-    console.log("DeepSeek Assistant installed.");
+    console.log('DeepSeek Sidebar Assistant installed');
 });

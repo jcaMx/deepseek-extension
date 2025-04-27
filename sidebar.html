@@ -1,57 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeepSeek Sidebar</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 10px;
-            background-color: #f9f9f9;
-        }
-
-        #sidebar {
-            background-color: #fff;
-            padding: 10px;
-            box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        textarea {
-            width: 100%;
-            height: 100px;
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deepseek Assistant</title>
+  <style>
+    :root {
+      --deepseek-primary: #1E65D9;
+      --deepseek-secondary: #4E8AEA;
+      --deepseek-light: #E5F0FF;
+      --deepseek-dark: #0A3A87;
+      --deepseek-gray: #F8FAFD;
+      --deepseek-text: #2D3748;
+      --deepseek-border: #E2E8F0;
+    }
+    
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+    
+    body {
+      margin: 0;
+      padding: 16px;
+      color: var(--deepseek-text);
+      background-color: #FFFFFF;
+    }
+    
+    .deepseek-sidebar {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(30, 101, 217, 0.08);
+      padding: 16px;
+      background-color: var(--deepseek-gray);
+    }
+    
+    .deepseek-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--deepseek-border);
+    }
+    
+    .deepseek-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--deepseek-primary) 0%, var(--deepseek-dark) 100%);
+      margin-right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 2px 6px rgba(10, 58, 135, 0.15);
+    }
+    
+    .deepseek-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--deepseek-dark);
+    }
+    
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+      background-color: white;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(30, 101, 217, 0.05);
+    }
+    
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--deepseek-dark);
+    }
+    
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 12px;
+      border: 2px solid var(--deepseek-border);
+      border-radius: 8px;
+      font-size: 14px;
+      resize: vertical;
+      transition: all 0.2s ease;
+      background-color: white;
+    }
+    
+    textarea:focus {
+      outline: none;
+      border-color: var(--deepseek-secondary);
+      box-shadow: 0 0 0 3px rgba(30, 101, 217, 0.1);
+    }
+    
+    textarea::placeholder {
+      color: #A0AEC0;
+    }
+    
+    button {
+      background: linear-gradient(to right, var(--deepseek-primary), var(--deepseek-secondary));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(30, 101, 217, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    button:hover {
+      background: linear-gradient(to right, var(--deepseek-dark), var(--deepseek-primary));
+      box-shadow: 0 4px 10px rgba(30, 101, 217, 0.3);
+      transform: translateY(-1px);
+    }
+    
+    button:active {
+      transform: translateY(1px);
+      box-shadow: 0 1px 3px rgba(30, 101, 217, 0.2);
+    }
+    
+    button:disabled {
+      background: #CBD5E0;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+    
+    .char-counter {
+      font-size: 12px;
+      color: #718096;
+      text-align: right;
+      margin-top: 6px;
+    }
+    
+    .status-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #718096;
+    }
+    
+    .status-indicator {
+      display: flex;
+      align-items: center;
+    }
+    
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #48BB78;
+      margin-right: 6px;
+    }
+    
+    .keyboard-shortcut {
+      color: #718096;
+      background-color: #EDF2F7;
+      padding: 4px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    
+    @media (max-width: 480px) {
+      .deepseek-sidebar {
+        width: 100%;
+        box-shadow: none;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div id="sidebar">
-        <h3>Ask DeepSeek a question</h3>
-        <textarea id="question" placeholder="Type your question here"></textarea>
-        <button id="submit-question">Get Answer</button>
+  <div class="deepseek-sidebar">
+    <div class="deepseek-header">
+      <div class="deepseek-logo">D</div>
+       <!-- <div class="deepseek-logo"><img src="icons/icon16.png" alt=""></div> -->
+      <div class="deepseek-title">Deepseek Assistant</div>
     </div>
-    <script src="sidebar.js"></script>
+    
+    <div class="input-container">
+      <label for="chatInput">Ask Deepseek a question</label>
+      <textarea 
+        id="chatInput" 
+        placeholder="Type your question here..."
+        aria-label="Your question for Deepseek"></textarea>
+      <div class="char-counter"><span id="charCount">0</span> characters</div>
+    </div>
+    
+    <button id="sendBtn">
+      Send
+    </button>
+    
+    <div class="status-container">
+      <div class="status-indicator">
+        <div class="status-dot"></div>
+        <span>Deepseek is ready</span>
+      </div>
+      <div class="keyboard-shortcut">Ctrl+Enter</div>
+    </div>
+  </div>
+
+  <script src="sidebar.js"></script>
 </body>
 </html>
