@@ -1,6 +1,6 @@
 #  DeepSeek Assistant – Chrome Extension
 
-A simple Chrome Extension that detects if you're on [DeepSeek.com](https://www.deepseek.com) and lets you send prompts directly into the chat interface via a popup assistant. Great for building custom workflows or AI automations.
+A simple Chrome Extension that detects if you're on [DeepSeek.com](https://www.deepseek.com) and lets you send prompts directly into the chat interface via a sidebar assistant. Great for building custom workflows or AI automations.
 
 ---
 
